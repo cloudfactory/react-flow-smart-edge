@@ -1,5 +1,6 @@
 import { roundUp, roundDown } from './utils'
-import type { Node, XYPosition } from 'reactflow'
+import type { Node, XYPosition } from '@xyflow/react'
+import type { DefaultNodeDataType } from 'SmartEdge/SmartEdge.types'
 
 export type NodeBoundingBox = {
 	id: string
@@ -33,7 +34,9 @@ export type GraphBoundingBox = {
  * @param roundTo Everything will be rounded to this nearest integer
  * @returns Graph and nodes bounding boxes.
  */
-export const getBoundingBoxes = <NodeDataType = unknown>(
+export const getBoundingBoxes = <
+	NodeDataType extends DefaultNodeDataType = DefaultNodeDataType
+>(
 	nodes: Node<NodeDataType>[],
 	nodePadding = 2,
 	roundTo = 2
@@ -44,12 +47,11 @@ export const getBoundingBoxes = <NodeDataType = unknown>(
 	let yMin = Number.MAX_SAFE_INTEGER
 
 	const nodeBoxes: NodeBoundingBox[] = nodes.map((node) => {
-		const width = Math.max(node.width || 0, 1)
-		const height = Math.max(node.height || 0, 1)
+		const { width = 1, height = 1 } = node.measured || {}
 
 		const position: XYPosition = {
-			x: node.positionAbsolute?.x || 0,
-			y: node.positionAbsolute?.y || 0
+			x: node.position.x || 0,
+			y: node.position.y || 0
 		}
 
 		const topLeft: XYPosition = {
