@@ -22,6 +22,7 @@ export type EdgeParams = Pick<
 	| 'targetY'
 	| 'sourcePosition'
 	| 'targetPosition'
+	| 'selected'
 >
 
 export type GetSmartEdgeOptions = {
