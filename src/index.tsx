@@ -1,6 +1,7 @@
 import { SmartBezierEdge } from './SmartBezierEdge'
 
 export * from './SmartEdge'
+export * from './SmartEdge/SmartEdge.types'
 export * from './SmartBezierEdge'
 export * from './SmartStepEdge'
 export * from './SmartStraightEdge'

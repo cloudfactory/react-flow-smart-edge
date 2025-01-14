@@ -1,12 +1,18 @@
+import { useNodes, BezierEdge } from '@xyflow/react'
 import React from 'react'
-import { useNodes, BezierEdge } from 'reactflow'
 import { getSmartEdge } from '../getSmartEdge'
-import type { EdgeData, NodeData } from './DummyData'
-import type { EdgeProps } from 'reactflow'
+import type { EdgeProps, Node } from '@xyflow/react'
+import type {
+	DefaultEdgeDataType,
+	DefaultNodeDataType
+} from 'SmartEdge/SmartEdge.types'
 
 const size = 20
 
-export function SmartEdgeCustomLabel(props: EdgeProps<EdgeData>) {
+export function SmartEdgeCustomLabel<
+	TEdgeDataType extends DefaultEdgeDataType = DefaultEdgeDataType,
+	TNodeDataType extends DefaultNodeDataType = DefaultNodeDataType
+>(props: EdgeProps<TEdgeDataType>) {
 	const {
 		id,
 		sourcePosition,
@@ -20,7 +26,7 @@ export function SmartEdgeCustomLabel(props: EdgeProps<EdgeData>) {
 		markerEnd
 	} = props
 
-	const nodes = useNodes<NodeData>()
+	const nodes = useNodes<Node<TNodeDataType>>()
 
 	const getSmartEdgeResponse = getSmartEdge({
 		sourcePosition,

@@ -11,7 +11,8 @@ import type {
 	PathFindingFunction,
 	SVGDrawFunction
 } from '../functions'
-import type { Node, EdgeProps } from 'reactflow'
+import type { Node, EdgeProps } from '@xyflow/react'
+import type { DefaultNodeDataType } from 'SmartEdge/SmartEdge.types'
 
 export type EdgeParams = Pick<
 	EdgeProps,
@@ -30,7 +31,9 @@ export type GetSmartEdgeOptions = {
 	generatePath?: PathFindingFunction
 }
 
-export type GetSmartEdgeParams<NodeDataType = unknown> = EdgeParams & {
+export type GetSmartEdgeParams<
+	NodeDataType extends DefaultNodeDataType = DefaultNodeDataType
+> = EdgeParams & {
 	options?: GetSmartEdgeOptions
 	nodes: Node<NodeDataType>[]
 }
@@ -41,7 +44,9 @@ export type GetSmartEdgeReturn = {
 	edgeCenterY: number
 }
 
-export const getSmartEdge = <NodeDataType = unknown>({
+export const getSmartEdge = <
+	NodeDataType extends DefaultNodeDataType = DefaultNodeDataType
+>({
 	options = {},
 	nodes = [],
 	sourceX,
